@@ -1,51 +1,91 @@
+<div align="center">
+
 # 🤖 FinWise - AI Financial Planner
 
-> **Open-source autonomous AI financial advisor** that helps you manage money through natural conversation. Built with Python, FastAPI, LangGraph, and Claude AI.
+### Open-source autonomous AI financial advisor that helps you manage money through natural conversation
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
+[![GitHub stars](https://img.shields.io/github/stars/monostacklabs-hash/finwise-beta?style=social)](https://github.com/monostacklabs-hash/finwise-beta/stargazers)
 
-**Chat naturally with your AI financial advisor:**
+[Features](#-key-features) • [Quick Start](#-quick-start) • [Documentation](#documentation) • [Contributing](#-contributing)
+
+---
+
+### 💬 Chat naturally with your AI financial advisor
+
 ```
 You: "I spent $45 on groceries"
 AI:  ✅ Added $45 expense in food category.
      Based on your spending, you're at 35% of your monthly budget.
 ```
 
+**Built with:** Python • FastAPI • LangGraph • Claude AI • PostgreSQL • React
+
+</div>
+
 ## ✨ Key Features
 
-- 💬 **Natural Language Interface** - Chat with your AI advisor like a human
-- 📊 **Smart Budget Tracking** - Automatic categorization and spending analysis
-- 🎯 **Goal Management** - Set and track financial goals with AI-powered milestones
-- 🔔 **Intelligent Notifications** - Budget alerts, bill reminders, milestone celebrations
-- 📈 **Cash Flow Forecasting** - 90-day projections based on recurring transactions
-- 🧠 **Dynamic Budgeting** - AI adjusts budgets based on your spending patterns
-- 🔄 **Recurring Transactions** - Auto-schedule bills and subscriptions
-- 📱 **Mobile App** - React Native iOS/Android with full feature parity
+<table>
+<tr>
+<td width="50%">
+
+### 🎯 Core Features
+- 💬 **Natural Language Interface** - Chat like you're texting a friend
+- 📊 **Smart Budget Tracking** - Automatic categorization & analysis
+- 🎯 **Goal Management** - AI-powered adaptive milestones
+- 🔔 **Intelligent Notifications** - Never miss bills or budget limits
+- 📈 **Cash Flow Forecasting** - 90-day projections
+
+</td>
+<td width="50%">
+
+### 🚀 Advanced Features
+- 🧠 **Dynamic Budgeting** - AI adjusts based on your behavior
+- 🔄 **Recurring Transactions** - Auto-schedule bills & subscriptions
+- 📱 **Mobile App** - React Native iOS/Android
 - 🔐 **Privacy First** - Self-hosted, your data stays with you
+- 💡 **Financial Simulations** - What-if scenario modeling
+
+</td>
+</tr>
+</table>
 
 ## 🚀 Quick Start
 
-## Quick Start
+### Prerequisites
+- Python 3.11+
+- Node.js 18+
+- PostgreSQL 15+
+- Docker (optional)
 
-### Backend API
+### 1️⃣ Clone & Setup
 ```bash
-# Start the backend
+git clone https://github.com/monostacklabs-hash/finwise-beta.git
+cd finwise-beta
+
+# Setup environment
+cp .env.python.example .env
+# Edit .env and add your ANTHROPIC_API_KEY or OPENAI_API_KEY
+```
+
+### 2️⃣ Start Backend API
+```bash
 ./scripts/dev/start-backend.sh
 ```
-
 Visit http://localhost:8000/docs for interactive API documentation.
 
-### Web Application
+### 3️⃣ Start Web Application
 ```bash
-# Start the web app (requires backend running)
 ./scripts/dev/start-web.sh
 ```
-
 Visit http://localhost:5173 for the web interface.
 
-> **Note**: Old scripts (`./run_python_app.sh`, `./start_web_dev.sh`) are deprecated. See [MIGRATION_GUIDE.md](./MIGRATION_GUIDE.md) for new paths.
+### 🐳 Docker (Alternative)
+```bash
+docker compose -f docker-compose.python.yml up
+```
 
 ## Documentation
 
@@ -230,13 +270,39 @@ cp .env.python.example .env
 
 ## 🤝 Contributing
 
-Contributions welcome! This is an open-source project.
+We love contributions! Here's how you can help:
 
+<table>
+<tr>
+<td>
+
+**🐛 Found a bug?**  
+[Open an issue](https://github.com/monostacklabs-hash/finwise-beta/issues/new)
+
+</td>
+<td>
+
+**💡 Have an idea?**  
+[Request a feature](https://github.com/monostacklabs-hash/finwise-beta/issues/new)
+
+</td>
+<td>
+
+**📝 Want to code?**  
+Fork → Branch → PR
+
+</td>
+</tr>
+</table>
+
+### Development Workflow
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## 📝 License
 
