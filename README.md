@@ -1,6 +1,31 @@
-# AI Financial Planner
+# 🤖 FinWise - AI Financial Planner
 
-Autonomous AI financial planning agent built with Python, FastAPI, and LangGraph.
+> **Open-source autonomous AI financial advisor** that helps you manage money through natural conversation. Built with Python, FastAPI, LangGraph, and Claude AI.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
+
+**Chat naturally with your AI financial advisor:**
+```
+You: "I spent $45 on groceries"
+AI:  ✅ Added $45 expense in food category.
+     Based on your spending, you're at 35% of your monthly budget.
+```
+
+## ✨ Key Features
+
+- 💬 **Natural Language Interface** - Chat with your AI advisor like a human
+- 📊 **Smart Budget Tracking** - Automatic categorization and spending analysis
+- 🎯 **Goal Management** - Set and track financial goals with AI-powered milestones
+- 🔔 **Intelligent Notifications** - Budget alerts, bill reminders, milestone celebrations
+- 📈 **Cash Flow Forecasting** - 90-day projections based on recurring transactions
+- 🧠 **Dynamic Budgeting** - AI adjusts budgets based on your spending patterns
+- 🔄 **Recurring Transactions** - Auto-schedule bills and subscriptions
+- 📱 **Mobile App** - React Native iOS/Android with full feature parity
+- 🔐 **Privacy First** - Self-hosted, your data stays with you
+
+## 🚀 Quick Start
 
 ## Quick Start
 
@@ -119,14 +144,25 @@ The AI agent autonomously:
 - 180-day forecasts with impact analysis
 - Actionable recommendations
 
-## Technology Stack
+## 🛠️ Technology Stack
 
+**Backend**
 - **Python 3.11+** - Modern, type-safe
 - **FastAPI** - High-performance async web framework
 - **LangGraph** - Autonomous agent orchestration
-- **Anthropic Claude** - AI model (configurable: OpenAI, Grok)
 - **PostgreSQL** - Reliable data persistence
 - **Docker** - Easy deployment
+
+**AI Models** (configurable)
+- **Anthropic Claude** (default) - claude-3-5-haiku-20241022
+- **OpenAI GPT-4** - gpt-4o
+- **Groq** - llama-3.1-70b-versatile
+- **xAI Grok** - grok-beta
+
+**Frontend**
+- **React + TypeScript** - Modern web app with Vite
+- **React Native** - iOS/Android mobile app
+- **TailwindCSS** - Responsive design
 
 ## Current Configuration
 
@@ -177,6 +213,39 @@ fin-agent/
 
 See [MIGRATION_GUIDE.md](./MIGRATION_GUIDE.md) for details on the new organization.
 
-## License
+## 🔒 Security & Privacy
 
-MIT License
+- ✅ **No API keys committed** - All sensitive data in `.env` (gitignored)
+- ✅ **Self-hosted** - Your financial data stays on your infrastructure
+- ✅ **JWT authentication** - Secure user sessions
+- ✅ **GDPR/CCPA compliant** - Full data deletion support
+- ✅ **Open source** - Audit the code yourself
+
+**Environment Setup:**
+```bash
+# Copy example and add your API keys
+cp .env.python.example .env
+# Edit .env and add your ANTHROPIC_API_KEY or OPENAI_API_KEY
+```
+
+## 🤝 Contributing
+
+Contributions welcome! This is an open-source project.
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+MIT License - see [LICENSE](LICENSE) for details
+
+## 🌟 Star History
+
+If you find this project useful, please consider giving it a star! ⭐
+
+---
+
+**Built with ❤️ by the FinWise team** | [Report Bug](https://github.com/monostacklabs-hash/finwise-beta/issues) | [Request Feature](https://github.com/monostacklabs-hash/finwise-beta/issues)
