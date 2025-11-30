@@ -1,0 +1,23 @@
+{
+  "name": "fin-agent",
+  "version": "2.0.0",
+  "description": "AI Financial Planner - Python Backend + React Native Mobile",
+  "scripts": {
+    "docker:up": "docker compose -f docker-compose.python.yml up",
+    "docker:up:detached": "docker compose -f docker-compose.python.yml up -d",
+    "docker:down": "docker compose -f docker-compose.python.yml down",
+    "docker:restart": "docker compose -f docker-compose.python.yml restart",
+    "docker:logs": "docker compose -f docker-compose.python.yml logs -f --tail=100",
+    "docker:logs:backend": "docker compose -f docker-compose.python.yml logs -f --tail=100 backend",
+    "docker:logs:db": "docker compose -f docker-compose.python.yml logs -f --tail=100 postgres",
+    "docker:build": "docker compose -f docker-compose.python.yml build",
+    "docker:clean": "docker compose -f docker-compose.python.yml down -v",
+    "db:init": "cd backend && python scripts/init_db.py",
+    "db:reset": "cd backend && python scripts/reset_db.py",
+    "backend:start": "./run_python_app.sh",
+    "mobile:start": "cd mobile && npm start",
+    "mobile:android": "cd mobile && npm run android",
+    "mobile:ios": "cd mobile && npm run ios"
+  },
+  "private": true
+}

@@ -1,0 +1,40 @@
+module.exports = {
+  expo: {
+    name: "Financial Planner",
+    slug: "financial-planner",
+    version: "1.0.0",
+    orientation: "portrait",
+    icon: "./assets/icon.png",
+    userInterfaceStyle: "automatic",
+    scheme: "finplanner",
+    splash: {
+      image: "./assets/splash.png",
+      resizeMode: "contain",
+      backgroundColor: "#0F172A"
+    },
+    assetBundlePatterns: [
+      "**/*"
+    ],
+    ios: {
+      supportsTablet: true,
+      bundleIdentifier: "com.financialplanner.app"
+    },
+    android: {
+      adaptiveIcon: {
+        foregroundImage: "./assets/adaptive-icon.png",
+        backgroundColor: "#0F172A"
+      },
+      package: "com.financialplanner.app"
+    },
+    web: {
+      favicon: "./assets/favicon.png",
+      bundler: "metro"
+    },
+    plugins: [
+      "expo-secure-store"
+    ],
+    extra: {
+      apiBaseUrl: process.env.API_BASE_URL || "http://localhost:8000/api/v1"
+    }
+  }
+};

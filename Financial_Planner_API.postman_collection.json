@@ -1,0 +1,811 @@
+{
+  "info": {
+    "name": "Financial Planner API",
+    "description": "Complete API collection for the AI-powered Financial Planning application with multi-agent system",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "financial-planner"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{auth_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "auth_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "user_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "Check if the API is running"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const response = pm.response.json();",
+                  "    pm.collectionVariables.set('auth_token', response.token);",
+                  "    pm.collectionVariables.set('user_id', response.user.id);",
+                  "    console.log('Token saved:', response.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"SecurePassword123!\",\n  \"name\": \"John Doe\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            },
+            "description": "Register a new user account"
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    pm.collectionVariables.set('auth_token', response.token);",
+                  "    pm.collectionVariables.set('user_id', response.user.id);",
+                  "    console.log('Token saved:', response.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"SecurePassword123!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Login with existing credentials"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/profile",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "profile"]
+            },
+            "description": "Get current user profile (requires authentication)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "Add Income Transaction",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"transaction\",\n  \"transactionType\": \"income\",\n  \"amount\": 5000,\n  \"description\": \"Monthly salary\",\n  \"date\": \"2025-11-01\",\n  \"category\": \"salary\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/financial-event",
+              "host": ["{{base_url}}"],
+              "path": ["financial-event"]
+            },
+            "description": "Add an income transaction (AI will auto-categorize if category not provided)"
+          },
+          "response": []
+        },
+        {
+          "name": "Add Expense Transaction",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"transaction\",\n  \"transactionType\": \"expense\",\n  \"amount\": 150.50,\n  \"description\": \"Grocery shopping at Whole Foods\",\n  \"date\": \"2025-11-01\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/financial-event",
+              "host": ["{{base_url}}"],
+              "path": ["financial-event"]
+            },
+            "description": "Add an expense transaction (AI will auto-categorize)"
+          },
+          "response": []
+        },
+        {
+          "name": "Add Expense - Restaurant",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"transaction\",\n  \"transactionType\": \"expense\",\n  \"amount\": 85.00,\n  \"description\": \"Dinner at Italian restaurant\",\n  \"date\": \"2025-11-01\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/financial-event",
+              "host": ["{{base_url}}"],
+              "path": ["financial-event"]
+            },
+            "description": "Add a restaurant expense"
+          },
+          "response": []
+        },
+        {
+          "name": "Add Expense - Utilities",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"transaction\",\n  \"transactionType\": \"expense\",\n  \"amount\": 120.00,\n  \"description\": \"Electric bill payment\",\n  \"date\": \"2025-11-01\",\n  \"category\": \"utilities\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/financial-event",
+              "host": ["{{base_url}}"],
+              "path": ["financial-event"]
+            },
+            "description": "Add a utility expense"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Debts & Loans",
+      "item": [
+        {
+          "name": "Add Debt",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"debt\",\n  \"debtType\": \"debt\",\n  \"name\": \"Credit Card Debt\",\n  \"principal\": 5000,\n  \"interestRate\": 18.5,\n  \"startDate\": \"2025-01-01\",\n  \"endDate\": \"2026-12-31\",\n  \"monthlyPayment\": 250\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/financial-event",
+              "host": ["{{base_url}}"],
+              "path": ["financial-event"]
+            },
+            "description": "Add a debt with repayment schedule calculation"
+          },
+          "response": []
+        },
+        {
+          "name": "Add Loan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"loan\",\n  \"debtType\": \"loan\",\n  \"name\": \"Personal Loan to Friend\",\n  \"principal\": 2000,\n  \"interestRate\": 5.0,\n  \"startDate\": \"2025-11-01\",\n  \"endDate\": \"2026-11-01\",\n  \"monthlyPayment\": 175\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/financial-event",
+              "host": ["{{base_url}}"],
+              "path": ["financial-event"]
+            },
+            "description": "Add a loan (money lent to others)"
+          },
+          "response": []
+        },
+        {
+          "name": "Add Auto-Calculate Debt",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"debt\",\n  \"debtType\": \"debt\",\n  \"name\": \"Student Loan\",\n  \"principal\": 25000,\n  \"interestRate\": 6.5,\n  \"startDate\": \"2025-11-01\",\n  \"endDate\": \"2035-11-01\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/financial-event",
+              "host": ["{{base_url}}"],
+              "path": ["financial-event"]
+            },
+            "description": "Add debt without monthly payment - AI will calculate it"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Goals",
+      "item": [
+        {
+          "name": "Add Goal",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"goal\",\n  \"name\": \"Emergency Fund\",\n  \"targetAmount\": 10000,\n  \"currentAmount\": 2000,\n  \"targetDate\": \"2026-12-31\",\n  \"priority\": \"high\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/financial-event",
+              "host": ["{{base_url}}"],
+              "path": ["financial-event"]
+            },
+            "description": "Add a financial goal"
+          },
+          "response": []
+        },
+        {
+          "name": "Add Goal - Vacation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"goal\",\n  \"name\": \"Europe Vacation\",\n  \"targetAmount\": 5000,\n  \"currentAmount\": 500,\n  \"targetDate\": \"2026-06-30\",\n  \"priority\": \"medium\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/financial-event",
+              "host": ["{{base_url}}"],
+              "path": ["financial-event"]
+            },
+            "description": "Add a vacation savings goal"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Goals with Projections",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/goals",
+              "host": ["{{base_url}}"],
+              "path": ["goals"]
+            },
+            "description": "Get all goals with AI-powered projections and recommendations"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dashboard & Analytics",
+      "item": [
+        {
+          "name": "Get Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/dashboard",
+              "host": ["{{base_url}}"],
+              "path": ["dashboard"]
+            },
+            "description": "Get financial dashboard with health metrics, recent transactions, and summary"
+          },
+          "response": []
+        },
+        {
+          "name": "Get AI Insights",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/insights",
+              "host": ["{{base_url}}"],
+              "path": ["insights"]
+            },
+            "description": "Get AI-generated financial insights and recommendations using LangGraph orchestrator"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Activity Logs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/logs?limit=50&offset=0",
+              "host": ["{{base_url}}"],
+              "path": ["logs"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Get user activity logs with pagination"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Simulations",
+      "item": [
+        {
+          "name": "Run Scenario Simulation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Salary Increase Scenario\",\n  \"incomeChange\": 500,\n  \"expenseChange\": 0,\n  \"oneTimeExpense\": 0,\n  \"months\": 12\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/simulate",
+              "host": ["{{base_url}}"],
+              "path": ["simulate"]
+            },
+            "description": "Run a what-if scenario simulation"
+          },
+          "response": []
+        },
+        {
+          "name": "Run Emergency Scenario",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Emergency Expense\",\n  \"incomeChange\": 0,\n  \"expenseChange\": 0,\n  \"oneTimeExpense\": 3000,\n  \"months\": 6\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/simulate",
+              "host": ["{{base_url}}"],
+              "path": ["simulate"]
+            },
+            "description": "Simulate impact of emergency expense"
+          },
+          "response": []
+        },
+        {
+          "name": "Run Budget Cut Scenario",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Reduce Monthly Expenses\",\n  \"incomeChange\": 0,\n  \"expenseChange\": -300,\n  \"oneTimeExpense\": 0,\n  \"months\": 12\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/simulate",
+              "host": ["{{base_url}}"],
+              "path": ["simulate"]
+            },
+            "description": "Simulate impact of reducing monthly expenses"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Natural Language Chat (AI)",
+      "item": [
+        {
+          "name": "Chat - Add Expense",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"I spent $45 on groceries at Whole Foods today\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/chat",
+              "host": ["{{base_url}}"],
+              "path": ["chat"]
+            },
+            "description": "Add expense using natural language - AI will understand and categorize automatically"
+          },
+          "response": []
+        },
+        {
+          "name": "Chat - Check Balance",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"What is my current balance?\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/chat",
+              "host": ["{{base_url}}"],
+              "path": ["chat"]
+            },
+            "description": "Ask about current balance in natural language"
+          },
+          "response": []
+        },
+        {
+          "name": "Chat - Get Dashboard",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Show me my financial overview\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/chat",
+              "host": ["{{base_url}}"],
+              "path": ["chat"]
+            },
+            "description": "Get financial dashboard using conversational query"
+          },
+          "response": []
+        },
+        {
+          "name": "Chat - Get Insights",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Give me some financial advice\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/chat",
+              "host": ["{{base_url}}"],
+              "path": ["chat"]
+            },
+            "description": "Get AI-powered financial insights and recommendations"
+          },
+          "response": []
+        },
+        {
+          "name": "Chat - Analyze Spending",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"How much did I spend this month?\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/chat",
+              "host": ["{{base_url}}"],
+              "path": ["chat"]
+            },
+            "description": "Analyze spending patterns using natural language"
+          },
+          "response": []
+        },
+        {
+          "name": "Chat - Goal Progress",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"How are my goals progressing?\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/chat",
+              "host": ["{{base_url}}"],
+              "path": ["chat"]
+            },
+            "description": "Check goal progress conversationally"
+          },
+          "response": []
+        },
+        {
+          "name": "Chat - Add Income",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"I received my $5000 salary today\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/chat",
+              "host": ["{{base_url}}"],
+              "path": ["chat"]
+            },
+            "description": "Add income using natural language"
+          },
+          "response": []
+        },
+        {
+          "name": "Chat - Restaurant Expense",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Dinner at Italian restaurant cost me $85\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/chat",
+              "host": ["{{base_url}}"],
+              "path": ["chat"]
+            },
+            "description": "Add restaurant expense naturally - AI categorizes automatically"
+          },
+          "response": []
+        },
+        {
+          "name": "Chat - Debt Question",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"How can I pay off my debts faster?\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/chat",
+              "host": ["{{base_url}}"],
+              "path": ["chat"]
+            },
+            "description": "Ask about debt optimization strategies"
+          },
+          "response": []
+        },
+        {
+          "name": "Chat - What-If Scenario",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"What if I save $500 more per month?\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/chat",
+              "host": ["{{base_url}}"],
+              "path": ["chat"]
+            },
+            "description": "Run what-if scenarios conversationally"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Admin - Cost Monitoring",
+      "item": [
+        {
+          "name": "Get AI Cost Metrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/cost-metrics",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "cost-metrics"]
+            },
+            "description": "Get AI token usage and cost metrics with optimization score"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Detailed Cost Report",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/cost-report",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "cost-report"]
+            },
+            "description": "Get detailed cost breakdown by provider and operation"
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Cost Metrics",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/reset-metrics",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "reset-metrics"]
+            },
+            "description": "Reset all cost tracking metrics (admin only)"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

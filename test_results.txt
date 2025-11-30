@@ -1,0 +1,156 @@
+
+[1m[92m================================================================================[0m
+[1m[92mCHAT API E2E TEST SUITE[0m
+[1m[92m================================================================================[0m
+
+[93mℹ Test Email: test_chat_1762359520@example.com[0m
+[93mℹ Base URL: http://localhost:8000/api/v1[0m
+[93mℹ Database: localhost:5432/financial_planner[0m
+
+[1m[94m================================================================================[0m
+[1m[94mTEST 1: User Registration[0m
+[1m[94m================================================================================[0m
+
+[93mℹ Registering user: test_chat_1762359520@example.com[0m
+[92m✓ User registered successfully[0m
+[93mℹ User ID: 184edb01-077b-4ff6-b5b3-6c7142b9c549[0m
+[93mℹ Token: eyJhbGciOiJIUzI1NiIs...[0m
+[93mℹ Verifying user in database...[0m
+[92m✓ User verified in database[0m
+  - Email: test_chat_1762359520@example.com
+  - Name: Chat Test User
+  - Currency: USD
+  - Timezone: UTC
+
+[1m[94m================================================================================[0m
+[1m[94mTEST 2: Add Expense via Chat[0m
+[1m[94m================================================================================[0m
+
+[93mℹ Sending message: I spent $45.50 on groceries at Whole Foods[0m
+[92m✓ Chat response received[0m
+  - Response: ✅ Logged expense: $45.50 for groceries at Whole Foods
+  - Tools used: ['add_transaction']
+  - Success: True
+[93mℹ Verifying transaction in database...[0m
+[92m✓ Transaction found in database[0m
+  - ID: b27a2389-4004-42e7-8a05-80d962e16fe5
+  - Type: EXPENSE
+  - Amount: $45.5
+  - Description: groceries at Whole Foods
+  - Category: food
+  - Date: 2025-11-05 16:18:42.108912
+
+[1m[94m================================================================================[0m
+[1m[94mTEST 3: Add Income via Chat[0m
+[1m[94m================================================================================[0m
+
+[93mℹ Sending message: I got a $5000 bonus payment[0m
+[92m✓ Chat response received[0m
+  - Response: ✅ Logged income: $5000 bonus payment
+  - Tools used: ['add_transaction']
+[93mℹ Verifying income transaction in database...[0m
+[92m✓ Income transaction found in database[0m
+  - ID: 1db2a255-af50-45b7-a262-5468a3b2a5eb
+  - Amount: $5000.0
+  - Description: Bonus payment
+
+[1m[94m================================================================================[0m
+[1m[94mTEST 4: Create Goal via Chat[0m
+[1m[94m================================================================================[0m
+
+[93mℹ Sending message: I want to save $10,000 for a vacation by December 2026[0m
+[92m✓ Chat response received[0m
+  - Response: ✅ Created vacation goal: Save $10,000 by December 2026
+  - Tools used: ['add_financial_goal']
+[93mℹ Verifying goal in database...[0m
+[92m✓ Goal found in database[0m
+  - ID: 77b85fc3-d891-4bfa-9870-08e5b15caa75
+  - Name: Vacation
+  - Target Amount: $10000.0
+  - Current Amount: $0.0
+  - Target Date: 2026-12-31 00:00:00
+  - Status: ACTIVE
+
+[1m[94m================================================================================[0m
+[1m[94mTEST 5: Add Debt via Chat[0m
+[1m[94m================================================================================[0m
+
+[93mℹ Sending message: I have a credit card debt of $2500 with 18% APR and $100 monthly payment[0m
+[92m✓ Chat response received[0m
+  - Response: ✅ Added credit card debt: $2,500 at 18% APR with $100 monthly payment
+  - Tools used: ['add_debt_or_loan']
+[93mℹ Verifying debt in database...[0m
+[92m✓ Debt found in database[0m
+  - ID: 0e9a40a0-ee58-4dad-8d8f-d48cb1b7663b
+  - Type: DEBT
+  - Name: Credit Card Debt
+  - Remaining Amount: $2500.0
+  - Interest Rate: 18.0%
+  - Monthly Payment: $100.0
+  - Status: ACTIVE
+
+[1m[94m================================================================================[0m
+[1m[94mTEST 6: Create Recurring Transaction via Chat[0m
+[1m[94m================================================================================[0m
+
+[93mℹ Sending message: I pay $1200 rent every month on the 1st[0m
+[92m✓ Chat response received[0m
+  - Response: ✅ Set up monthly rent: $1,200 due on the 1st of each month
+  - Tools used: ['create_recurring_transaction']
+[93mℹ Verifying recurring transaction in database...[0m
+[92m✓ Recurring transaction found in database[0m
+  - ID: 447ddae4-a617-4cc5-99de-2f1cd6eb3ee9
+  - Type: expense
+  - Amount: $1200.0
+  - Description: Monthly rent payment
+  - Frequency: monthly
+  - Next Date: 2024-12-01 00:00:00
+  - Auto Add: True
+
+[1m[94m================================================================================[0m
+[1m[94mTEST 7: Query Financial Health via Chat[0m
+[1m[94m================================================================================[0m
+
+[93mℹ Sending message: What's my financial health?[0m
+[92m✓ Chat response received[0m
+  - Response: Excellent financial health! 95/100 score with 99% savings rate and positive net worth of $2,454.
+  - Tools used: ['calculate_financial_health']
+[93mℹ Verifying data consistency in database...[0m
+[92m✓ Database state summary:[0m
+  - Total Transactions: 2
+  - Total Goals: 1
+  - Total Debts: 1
+  - Total Income: $5000.00
+  - Total Expenses: $45.50
+  - Net: $4954.50
+  - Total Active Debt: $0.00
+
+[1m[94m================================================================================[0m
+[1m[94mTEST 8: Chat with Conversation History[0m
+[1m[94m================================================================================[0m
+
+[93mℹ Message 1: I spent $25 on lunch[0m
+[92m✓ Response 1: ✅ Logged expense: $25 for lunch[0m
+[93mℹ Message 2: Actually, make that $30[0m
+[92m✓ Response 2: ✅ Updated expense: $30 for lunch[0m
+[93mℹ Verifying updated transaction in database...[0m
+[92m✓ Found 2 lunch transaction(s)[0m
+  - Amount: $30.0, Description: lunch
+  - Amount: $25.0, Description: lunch
+
+[1m[94m================================================================================[0m
+[1m[94mTEST 9: Error Handling[0m
+[1m[94m================================================================================[0m
+
+[93mℹ Testing with invalid token...[0m
+[92m✓ Invalid token correctly rejected (401)[0m
+[93mℹ Testing with empty message...[0m
+[92m✓ Empty message handled (status: 200)[0m
+[93mℹ Testing with non-financial query...[0m
+[92m✓ Non-financial query handled[0m
+  - Response: I only handle financial operations.
+
+[1m[92m================================================================================[0m
+[1m[92mALL TESTS PASSED ✓[0m
+[1m[92m================================================================================[0m
+

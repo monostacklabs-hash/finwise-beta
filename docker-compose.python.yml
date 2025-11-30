@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: fin-agent-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: financial_planner
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Python FastAPI + LangGraph Backend
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    container_name: fin-agent-backend
+    ports:
+      - "8000:8000"
+    environment:
+      # Database
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/financial_planner
+      RESET_DB_ON_STARTUP: ${RESET_DB_ON_STARTUP:-false}  # Set to 'true' to drop/recreate DB on startup
+
+      # JWT
+      SECRET_KEY: ${SECRET_KEY:-your-secret-key-change-in-production-make-it-long-and-random}
+      ACCESS_TOKEN_EXPIRE_MINUTES: 10080  # 7 days
+
+      # AI Provider (set one)
+      AI_PROVIDER: ${AI_PROVIDER:-openai}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      GROK_API_KEY: ${GROK_API_KEY}
+      GROQ_API_KEY: ${GROQ_API_KEY}
+
+      # AI Model
+      AI_MODEL: ${AI_MODEL}
+      AI_TEMPERATURE: 0.7
+
+      # App
+      DEBUG: ${DEBUG:-false}
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app/backend
+    command: uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # Redis (optional, for caching)
+  redis:
+    image: redis:7-alpine
+    container_name: fin-agent-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  postgres_data:
