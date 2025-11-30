@@ -9,7 +9,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
 [![GitHub stars](https://img.shields.io/github/stars/monostacklabs-hash/finwise-beta?style=social)](https://github.com/monostacklabs-hash/finwise-beta/stargazers)
 
-[Features](#-key-features) • [Quick Start](#-quick-start) • [Documentation](#documentation) • [Contributing](#-contributing)
+[🌐 Live Demo](https://monostacklabs-hash.github.io/finwise-beta/) • [Features](#-key-features) • [Quick Start](#-quick-start) • [Documentation](#documentation) • [Contributing](#-contributing)
 
 ---
 
@@ -53,6 +53,8 @@ AI:  ✅ Added $45 expense in food category.
 </table>
 
 ## 🚀 Quick Start
+
+> **[📺 View Live Demo](https://monostacklabs-hash.github.io/finwise-beta/)** - See FinWise in action!
 
 ### Prerequisites
 - Python 3.11+
@@ -314,4 +316,10 @@ If you find this project useful, please consider giving it a star! ⭐
 
 ---
 
-**Built with ❤️ by the FinWise team** | [Report Bug](https://github.com/monostacklabs-hash/finwise-beta/issues) | [Request Feature](https://github.com/monostacklabs-hash/finwise-beta/issues)
+<div align="center">
+
+**Built with ❤️ by the FinWise team**
+
+[🌐 Website](https://monostacklabs-hash.github.io/finwise-beta/) • [📖 Docs](https://github.com/monostacklabs-hash/finwise-beta#documentation) • [🐛 Report Bug](https://github.com/monostacklabs-hash/finwise-beta/issues) • [✨ Request Feature](https://github.com/monostacklabs-hash/finwise-beta/issues)
+
+</div>
