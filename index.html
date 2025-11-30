@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinWise - AI Financial Planner</title>
+    <meta name="description" content="Your autonomous AI financial advisor. Chat naturally, track budgets, and reach your goals with FinWise.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container nav">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-robot" style="color: var(--primary);"></i>
+                <span>FinWise</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#how-it-works" class="nav-link">How it Works</a>
+                <a href="https://github.com/monostacklabs-hash/finwise-beta" class="nav-link">Docs</a>
+            </nav>
+            <a href="https://github.com/monostacklabs-hash/finwise-beta" class="btn btn-primary">
+                <i class="fa-brands fa-github" style="margin-right: 0.5rem;"></i> View on GitHub
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badges">
+                        <span class="badge">v1.0 Beta</span>
+                        <span class="badge">Open Source</span>
+                    </div>
+                    <h1>Your Personal AI<br>Financial Architect</h1>
+                    <p style="margin: 1.5rem 0 2.5rem;">
+                        Stop wrestling with spreadsheets. Chat naturally with FinWise to track expenses, 
+                        forecast cash flow, and master your money—all while keeping your data private.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://github.com/monostacklabs-hash/finwise-beta" class="btn btn-primary">
+                            Get Started
+                        </a>
+                        <a href="#features" class="btn btn-outline">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+
+                <div class="preview-container">
+                    <div class="chat-ui">
+                        <!-- Chat messages will be injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section">
+            <div class="container">
+                <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                    <h2 class="section-title">Intelligent Finance</h2>
+                    <p>Built with Python, FastAPI, and advanced LLMs to give you financial superpowers.</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-regular fa-comments" style="color: var(--primary);"></i>
+                        </div>
+                        <h3 class="feature-title">Natural Conversation</h3>
+                        <p>Just say "I spent $20 on lunch" or "How much can I spend this weekend?". No complex forms needed.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-chart-pie" style="color: var(--accent);"></i>
+                        </div>
+                        <h3 class="feature-title">Smart Budgeting</h3>
+                        <p>Dynamic budgets that adjust to your spending habits. Get alerts before you overspend.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-shield-halved" style="color: #f59e0b;"></i>
+                        </div>
+                        <h3 class="feature-title">Privacy First</h3>
+                        <p>Self-hosted and open source. Your financial data stays on your machine, not in the cloud.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-wand-magic-sparkles" style="color: #ec4899;"></i>
+                        </div>
+                        <h3 class="feature-title">Cash Flow Forecast</h3>
+                        <p>See the future. FinWise projects your balance 90 days out based on recurring bills and income.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-bullseye" style="color: #8b5cf6;"></i>
+                        </div>
+                        <h3 class="feature-title">Goal Tracking</h3>
+                        <p>Set milestones for vacations or emergency funds. We'll help you stay on track to reach them.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-mobile-screen" style="color: #10b981;"></i>
+                        </div>
+                        <h3 class="feature-title">Cross Platform</h3>
+                        <p>Access your financial brain from the web dashboard or our native iOS/Android mobile app.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="section" style="background: rgba(255,255,255,0.02);">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <h2>How It Works</h2>
+                </div>
+                
+                <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                    <div style="text-align: center;">
+                        <div style="font-size: 4rem; font-weight: 700; color: rgba(255,255,255,0.1); margin-bottom: 1rem;">01</div>
+                        <h3 style="margin-bottom: 1rem;">Deploy</h3>
+                        <p>Clone the repo and run with Docker. It's self-contained and ready to go.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 4rem; font-weight: 700; color: rgba(255,255,255,0.1); margin-bottom: 1rem;">02</div>
+                        <h3 style="margin-bottom: 1rem;">Connect</h3>
+                        <p>Add your accounts and set up your initial budget categories.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 4rem; font-weight: 700; color: rgba(255,255,255,0.1); margin-bottom: 1rem;">03</div>
+                        <h3 style="margin-bottom: 1rem;">Chat</h3>
+                        <p>Start talking to your new financial advisor to track and optimize your money.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="logo" style="justify-content: center; margin-bottom: 1.5rem;">
+                <i class="fa-solid fa-robot" style="color: var(--text-muted);"></i>
+                <span style="color: var(--text-muted);">FinWise</span>
+            </div>
+            <p>The Open Source AI Financial Planner</p>
+            
+            <div class="footer-links">
+                <a href="https://github.com/monostacklabs-hash/finwise-beta" class="social-link"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fa-brands fa-discord"></i></a>
+            </div>
+            
+            <p style="font-size: 0.875rem; opacity: 0.5;">
+                &copy; 2025 FinWise Team. Released under the MIT License.
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
